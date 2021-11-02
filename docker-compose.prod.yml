@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - 4001:4001
+    environment:
+      - MONGO_CONNECTION=mongodb://mongo:27017
+  
+  mongo:
+    image: mongo:5.0.3
+    ports:
+      - 27017:27017
+    volumes:
+      - ./volumes/data/db:/data/db
+    command: --quiet --logpath /dev/null
+  
+  nginx:
+    build:
+      dockerfile: ./proxy/Dockerfile
+    ports:
+      - 8080:8080

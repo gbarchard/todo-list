@@ -11,6 +11,14 @@ services:
       - 3000:3000
     volumes:
       - ./frontend:/app
+  
+  frontend-codegen:
+    build:
+      context: ./frontend
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./frontend:/app
+    command: "npx graphql-codegen --watch \"**/*.gql\""
 
   backend:
     build:

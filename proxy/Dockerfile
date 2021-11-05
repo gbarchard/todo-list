@@ -5,6 +5,7 @@ FROM node:14-alpine3.12 as build-frontend
 WORKDIR /app
 COPY ./frontend ./
 RUN npm ci
+RUN npm run generate
 RUN npm run build
 
 

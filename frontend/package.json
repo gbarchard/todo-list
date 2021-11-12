@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.4.17",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -47,6 +48,7 @@
     "@graphql-codegen/fragment-matcher": "3.2.0",
     "@graphql-codegen/typescript": "2.3.0",
     "@graphql-codegen/typescript-operations": "2.2.0",
-    "@graphql-codegen/typescript-react-apollo": "^3.2.0"
+    "@graphql-codegen/typescript-react-apollo": "^3.2.0",
+    "@playlyfe/gql": "^2.6.2"
   }
 }

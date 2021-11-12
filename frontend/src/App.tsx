@@ -1,8 +1,11 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { useVersionQuery } from './generated/graphql';
 
 function App() {
+  const {data} = useVersionQuery()
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +21,10 @@ function App() {
         >
           Learn React
         </a>
+
+        <br/>
+
+        <p>{data?.version}</p>
       </header>
     </div>
   );

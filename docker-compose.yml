@@ -1,7 +1,5 @@
 version: "3.9"
 
-# **** STILL NEEDS WORK *****
-
 services:
   frontend:
     build:
@@ -11,7 +9,7 @@ services:
       - 3000:3000
     volumes:
       - ./frontend:/app
-      - ./backend/schema.gql:/backend/schema.gql
+      - ./backend/src/schema.gql:/backend/src/schema.gql
   
   frontend-codegen:
     build:
@@ -19,7 +17,7 @@ services:
       dockerfile: dev.Dockerfile
     volumes:
       - ./frontend:/app
-      - ./backend/schema.gql:/backend/schema.gql
+      - ./backend/src/schema.gql:/backend/src/schema.gql
     command: "npx graphql-codegen --watch \"**/*.gql\""
 
   backend:

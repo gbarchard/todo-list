@@ -3,9 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    // NOTE: Install the following:
-    // npm install -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
-    // npm install @craco/craco
+    "@craco/craco": "^6.4.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -50,6 +48,9 @@
     "@graphql-codegen/fragment-matcher": "3.2.0",
     "@graphql-codegen/typescript": "2.3.0",
     "@graphql-codegen/typescript-operations": "2.2.0",
-    "@graphql-codegen/typescript-react-apollo": "^3.2.0"
+    "@graphql-codegen/typescript-react-apollo": "^3.2.0",
+    "autoprefixer": "^9.8.8",
+    "postcss": "^7.0.39",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
   }
 }

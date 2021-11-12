@@ -7,7 +7,7 @@ function App() {
   const {data} = useVersionQuery()
 
   return (
-    <div className="App bg-blue-50">
+    <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -24,7 +24,7 @@ function App() {
 
         <br/>
 
-        <p>{data?.version}</p>
+        <p className="bg-blue-400 p-2 rounded-md">{data?.version}</p>
       </header>
     </div>
   );

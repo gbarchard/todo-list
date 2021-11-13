@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "@starter/frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -53,7 +53,6 @@
     "@graphql-codegen/typescript": "2.3.0",
     "@graphql-codegen/typescript-operations": "2.2.0",
     "@graphql-codegen/typescript-react-apollo": "^3.2.0",
-    "@playlyfe/gql": "^2.6.2",
     "autoprefixer": "^9.8.8",
     "postcss": "^7.0.39",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"

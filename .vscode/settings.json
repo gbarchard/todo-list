@@ -1,0 +1,11 @@
+{
+  "graphqlForVSCode.nodePath": "node_modules",
+  "editor.tabSize": 2,
+  "javascript.format.semicolons": "remove",
+  "typescript.format.semicolons": "remove",
+  "graphqlForVSCode.loglevel": "off",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.semi": false
+}

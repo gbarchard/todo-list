@@ -3,8 +3,8 @@ import { ExpressContext } from 'apollo-server-express'
 
 import fs from 'fs'
 import path from 'path'
-import { MutationResolvers, QueryResolvers, Resolvers } from '../generated/resolvers-types'
-import { Item, ItemsMutation, ItemsQuery } from '../resolvers/items/items'
+import { MutationResolvers, QueryResolvers } from 'src/generated/resolvers-types'
+import { Item, ItemsMutation, ItemsQuery } from 'src/resolvers/items/items'
 
 const packageJson = require('../../package.json')
 

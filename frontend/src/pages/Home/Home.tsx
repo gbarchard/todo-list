@@ -3,7 +3,7 @@ import {
   useAddItemMutation,
   useDeleteItemMutation,
   useItemsQuery,
-} from "../../generated/graphql"
+} from "src/generated/graphql"
 
 export function Home() {
   const { data } = useItemsQuery()

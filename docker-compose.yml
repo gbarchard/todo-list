@@ -3,6 +3,7 @@ version: "3.9"
 services:
   frontend:
     container_name: frontend
+    restart: on-failure
     build:
       context: ./frontend
       dockerfile: dev.Dockerfile
@@ -11,9 +12,10 @@ services:
     volumes:
       - ./frontend:/app
       - ./backend/src/schema.gql:/backend/src/schema.gql
-  
+
   codegen-frontend:
     container_name: codegen-frontend
+    restart: on-failure
     build:
       context: ./frontend
       dockerfile: dev.Dockerfile
@@ -24,6 +26,7 @@ services:
 
   backend:
     container_name: backend
+    restart: on-failure
     build:
       context: ./backend
       dockerfile: dev.Dockerfile
@@ -35,16 +38,17 @@ services:
       - MONGO_CONNECTION=mongodb://mongo:27017
     volumes:
       - ./backend:/app
-  
+
   codegen-backend:
     container_name: codegen-backend
+    restart: on-failure
     build:
       context: ./backend
       dockerfile: dev.Dockerfile
     volumes:
       - ./backend:/app
     command: "npm run gen:dev"
-  
+
   mongo:
     image: mongo:5.0.3
     container_name: mongo
@@ -53,7 +57,7 @@ services:
     volumes:
       - ./volumes/data/db:/data/db
     command: --quiet --logpath /dev/null
-  
+
   nginx:
     image: nginx:1.21.3-alpine
     container_name: nginx
@@ -63,4 +67,3 @@ services:
     volumes:
       - ./proxy/nginx.dev.conf:/etc/nginx/conf.d/default.conf
       - ./proxy/shared:/etc/nginx/shared
-

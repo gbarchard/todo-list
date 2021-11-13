@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "target": "es5",
     "module": "commonjs",
     "lib": [
@@ -13,6 +14,10 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
+    "paths": {
+      "src/*": ["./src/*"]
+    },
+    "noEmit": true
   },
   "include": [
     "src"

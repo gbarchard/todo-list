@@ -4,8 +4,8 @@ import {
   ItemResolvers,
   MutationResolvers,
   QueryResolvers,
-} from "../../generated/resolvers-types"
-import { _id, Mongo } from "../../utils/mongo"
+} from "src/generated/resolvers-types"
+import { _id, Mongo } from "src/utils/mongo"
 import { ItemModel } from "./itemModels"
 
 let itemsColl: Collection | null = null

@@ -1,5 +1,5 @@
 import React from "react"
-import { useVersionQuery } from "../../generated/graphql"
+import { useVersionQuery } from "src/generated/graphql"
 
 export function Version() {
   const { data } = useVersionQuery()

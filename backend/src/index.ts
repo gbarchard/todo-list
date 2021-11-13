@@ -1,4 +1,5 @@
-import { server } from "./utils/apollo"
+import { server } from "./apollo"
+import { startServer } from "./server"
 import { Mongo } from "./utils/mongo"
 
 // HANDLE EXITS
@@ -38,11 +39,7 @@ async function start() {
   await Mongo.connect()
 
   console.log("Starting server...")
-  return server
-    .listen({ port: process.env.SERVER_PORT || 4001 })
-    .then(({ url }) => {
-      console.log(`🚀  Server ready at ${url}`)
-    })
+  return startServer()
 }
 
 async function stop() {

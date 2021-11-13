@@ -12,7 +12,7 @@ import {
 } from "@apollo/client"
 
 const httpLink = new HttpLink({
-  uri: ({ operationName }) => `/n/api/${operationName}`,
+  uri: ({ operationName }) => `/n/api/graphql/${operationName}`,
 })
 
 const client = new ApolloClient({

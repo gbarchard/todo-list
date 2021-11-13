@@ -1,33 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { useVersionQuery } from './generated/graphql';
+import React from 'react'
+
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes
+} from "react-router-dom"
+
+import './App.css'
+
+import { Home } from './pages/Home/Home'
+import { Version } from './pages/Version/Version'
 
 function App() {
-  const {data} = useVersionQuery()
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-
-        <br/>
-
-        <p className="bg-blue-400 p-2 rounded-md">{data?.version}</p>
-      </header>
+    <div className="App container m-auto">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/version" element={<Version/>} />
+        </Routes>
+      </Router>
     </div>
-  );
+  )
 }
 
 export default App;

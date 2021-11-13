@@ -8,11 +8,16 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
+  HttpLink,
 } from "@apollo/client"
 
+const httpLink = new HttpLink({
+  uri: ({ operationName }) => `/n/api/${operationName}`,
+})
+
 const client = new ApolloClient({
-  uri: '/n/api',
-  cache: new InMemoryCache()
+  link: httpLink,
+  cache: new InMemoryCache(),
 })
 
 ReactDOM.render(

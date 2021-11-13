@@ -2,6 +2,7 @@ version: "3.9"
 
 services:
   frontend:
+    container_name: frontend
     build:
       context: ./frontend
       dockerfile: dev.Dockerfile
@@ -11,19 +12,23 @@ services:
       - ./frontend:/app
       - ./backend/src/schema.gql:/backend/src/schema.gql
   
-  frontend-codegen:
+  codegen-frontend:
+    container_name: codegen-frontend
     build:
       context: ./frontend
       dockerfile: dev.Dockerfile
     volumes:
       - ./frontend:/app
       - ./backend/src/schema.gql:/backend/src/schema.gql
-    command: "npx graphql-codegen --watch \"**/*.gql\""
+    command: "npm run gen:dev"
 
   backend:
+    container_name: backend
     build:
       context: ./backend
       dockerfile: dev.Dockerfile
+    depends_on:
+      - mongo
     ports:
       - 4001:4001
     environment:
@@ -31,8 +36,18 @@ services:
     volumes:
       - ./backend:/app
   
+  codegen-backend:
+    container_name: codegen-backend
+    build:
+      context: ./backend
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./backend:/app
+    command: "npm run gen:dev"
+  
   mongo:
     image: mongo:5.0.3
+    container_name: mongo
     ports:
       - 27017:27017
     volumes:
@@ -41,6 +56,8 @@ services:
   
   nginx:
     image: nginx:1.21.3-alpine
+    container_name: nginx
+    restart: on-failure
     ports:
       - 8080:8080
     volumes:

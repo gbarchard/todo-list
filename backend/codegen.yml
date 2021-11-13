@@ -1,0 +1,12 @@
+schema: src/**/*.gql
+generates:
+  src/generated/resolvers-types.ts:
+    config:
+      useIndexSignature: true
+      avoidOptionals: true
+      contextType: ../utils/apollo#RequestContext
+      mappers:
+        Item: ../resolvers/items/itemModels#ItemModel
+    plugins:
+      - typescript
+      - typescript-resolvers

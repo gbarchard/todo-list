@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY --chown=node:node . ./
 RUN npm install
+RUN npm run generate
 
 ENV NODE_ENV=development
 USER node

@@ -7,16 +7,22 @@
     "build": "rimraf ./build && tsc && cp package*.json build && cp -R src/*.gql build/src",
     "start": "npm run build && node build/src/index.js",
     "start:dev": "nodemon",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "graphql-codegen --config codegen.yml",
+    "gen:dev": "npx graphql-codegen --watch \"**/*.gql\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^3.4.0",
-    "graphql": "^16.0.0"
+    "graphql": "^16.0.0",
+    "mongodb": "^4.1.4"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.2.2",
+    "@graphql-codegen/typescript": "^2.3.1",
+    "@graphql-codegen/typescript-resolvers": "^2.4.0",
     "@playlyfe/gql": "^2.6.2",
     "@types/node": "^16.11.6",
     "nodemon": "^2.0.14",

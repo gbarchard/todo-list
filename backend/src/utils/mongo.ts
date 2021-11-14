@@ -1,7 +1,10 @@
+import DataLoader from "dataloader"
 import { Db, MongoClient } from "mongodb"
 
 const DEFAULT_DB = "default"
-const client = new MongoClient(process.env["MONGO_CONNECTION"] || "mongodb://mongo:27017")
+const client = new MongoClient(
+  process.env["MONGO_CONNECTION"] || "mongodb://mongo:27017"
+)
 
 export class Mongo {
   static db: Db = null as unknown as Db
@@ -18,6 +21,15 @@ export class Mongo {
 }
 
 export function _id(doc: any) {
-  if (typeof doc == 'object' && doc['_id']) return doc['_id']
+  if (typeof doc == "object" && doc["_id"]) return doc["_id"]
   else return null
+}
+
+export function idLoader<TDoc>(collection: string) {
+  return new DataLoader((keys) => {
+    return Mongo.db
+      .collection(collection)
+      .find<TDoc>({ _id: { $in: keys } })
+      .toArray()
+  })
 }

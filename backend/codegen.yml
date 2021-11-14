@@ -4,9 +4,9 @@ generates:
     config:
       useIndexSignature: true
       avoidOptionals: true
-      contextType: ../utils/apollo#RequestContext
+      contextType: src/apollo#RequestContext
       mappers:
-        Item: ../resolvers/items/itemModels#ItemModel
+        Item: src/resolvers/items/itemModels#ItemModel
     plugins:
       - typescript
       - typescript-resolvers

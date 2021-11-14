@@ -1,5 +1,4 @@
-import { server } from "./apollo"
-import { startServer } from "./server"
+import { startServer, stopServer } from "./server"
 import { Mongo } from "./utils/mongo"
 
 // HANDLE EXITS
@@ -47,7 +46,7 @@ async function stop() {
   await Mongo.close()
 
   console.log("Stop server...")
-  await server.stop()
+  await stopServer()
 }
 
 start().catch(async (e) => {

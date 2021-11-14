@@ -1,9 +1,12 @@
 import express from "express"
+import { Server } from "http"
 
 import { server } from "src/apollo"
-import { expressErrorLogger, expressLogger } from "./utils/logger"
+import { expressLogger } from "./utils/logger"
 
 const PORT = process.env.SERVER_PORT || 4001
+
+let expressServer: Server | null = null
 
 export async function startServer() {
   const app = express()
@@ -16,9 +19,16 @@ export async function startServer() {
   // TODO: Re-implement this when it is more flushed out
   //app.use(expressErrorLogger)
 
-  return app.listen(PORT, () => {
+  expressServer = app.listen(PORT, () => {
     console.log(
       `🚀  Server ready at http://localhost:${PORT} (GQL: ${server.graphqlPath})`
     )
   })
+
+  return expressServer
+}
+
+export async function stopServer() {
+  await server.stop()
+  await expressServer?.close()
 }

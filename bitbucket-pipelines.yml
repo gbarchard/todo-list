@@ -1,0 +1,151 @@
+image: atlassian/default-image:3
+
+definitions:
+  branchVars: &branch-vars export BRANCH_NAME="PR-${BITBUCKET_PR_ID}";
+    [ -z ${BITBUCKET_PR_ID+x} ] && export BRANCH_NAME=$BITBUCKET_BRANCH;
+    export BRANCH_BUILD=${BRANCH_NAME}_${BITBUCKET_BUILD_NUMBER};
+    export TAGS_LIST="${BRANCH_NAME} ${BRANCH_BUILD} ${BITBUCKET_COMMIT}";
+    echo "Built tags list ${TAGS_LIST}";
+  steps:
+    - step: &test-build-backend
+        name: "Test and Build Backend"
+        image: node:14-alpine3.12
+        script:
+          - cd backend
+          - npm install
+          - npm run generate
+          - npm test
+          - npm run build
+        artifacts:
+          - backend/build/**
+    - step: &test-build-frontend
+        name: "Test and Build Frontend"
+        image: node:14-alpine3.12
+        script:
+          - cd frontend
+          - npm install
+          - npm run generate
+          - npm test
+          - CI=false npm run build
+          - cd ..
+          - *branch-vars
+          - ZIP_FOLDER=frontend-${BRANCH_BUILD}.tar.gz
+          - tar -zcvf $ZIP_FOLDER frontend/build
+          - mkdir bundles
+          - mv $ZIP_FOLDER bundles
+          - echo "Zipped to bundles/${ZIP_FOLDER}"
+        artifacts:
+          - frontend/build/**
+          - bundles/**
+    - step: &build-backend-docker
+        name: "Build Backend Docker"
+        services:
+          - docker
+        script:
+          - *branch-vars
+          - mkdir images
+          - docker build . --file backend/prebuilt.Dockerfile --tag backend
+          - docker save --output "images/backend-${BRANCH_BUILD}.docker" backend
+        artifacts:
+          - images/**
+    - step: &build-proxy-docker
+        name: "Build Proxy Docker"
+        services:
+          - docker
+        script:
+          - *branch-vars
+          - mkdir images
+          - docker build . --file proxy/prebuilt.Dockerfile --tag proxy
+          - docker save --output "images/proxy-${BRANCH_BUILD}.docker" proxy
+        artifacts:
+          - images/**
+    - step: &push-backend-docker
+        name: "Push Backend Docker"
+        script:
+          - *branch-vars
+          - docker load --input "images/backend-${BRANCH_BUILD}.docker"
+          - pipe: atlassian/aws-ecr-push-image:1.5.0
+            variables:
+              IMAGE_NAME: "backend"
+              TAGS: "${TAGS_LIST}"
+    - step: &push-proxy-docker
+        name: "Push Proxy Docker"
+        script:
+          - *branch-vars
+          - docker load --input "images/proxy-${BRANCH_BUILD}.docker"
+          - pipe: atlassian/aws-ecr-push-image:1.5.0
+            variables:
+              IMAGE_NAME: "proxy"
+              TAGS: "${TAGS_LIST}"
+    - step: &push-frontend-bundle
+        name: "Push Frontend Build"
+        script:
+          - *branch-vars
+          - pipe: atlassian/aws-s3-deploy:1.1.0
+            variables:
+              S3_BUCKET: "<bucket>/${BRANCH_NAME}"
+              LOCAL_PATH: "bundles"
+
+pipelines:
+  pull-requests:
+    "**":
+      - parallel:
+          - step: *test-build-backend
+          - step: *test-build-frontend
+
+      - parallel:
+          - step: *build-backend-docker
+          - step: *build-proxy-docker
+
+      - parallel:
+          - step: *push-backend-docker
+          - step: *push-proxy-docker
+          - step: *push-frontend-bundle
+
+  branches:
+    develop:
+      - parallel:
+          - step: *test-build-backend
+          - step: *test-build-frontend
+
+      - parallel:
+          - step: *build-backend-docker
+          - step: *build-proxy-docker
+
+      - parallel:
+          - step: *push-backend-docker
+          - step: *push-proxy-docker
+          - step: *push-frontend-bundle
+
+      - step:
+          name: "Deployment to Develop"
+          deployment: develop
+          script:
+            - echo "Your deployment to develop script goes here..."
+
+    main:
+      - parallel:
+          - step: *test-build-backend
+          - step: *test-build-frontend
+
+      - parallel:
+          - step: *build-backend-docker
+          - step: *build-proxy-docker
+
+      - parallel:
+          - step: *push-backend-docker
+          - step: *push-proxy-docker
+          - step: *push-frontend-bundle
+
+      - step:
+          name: "Deployment to Staging"
+          deployment: staging
+          script:
+            - echo "Your deployment to staging script goes here..."
+
+      - step:
+          name: "Deployment to Production"
+          deployment: production
+          trigger: "manual"
+          script:
+            - echo "Your deployment to production script goes here..."

@@ -1,12 +1,16 @@
 import { ExpressContext, ApolloServer, gql } from "apollo-server-express"
-
 import fs from "fs"
 import path from "path"
+
 import {
   MutationResolvers,
   QueryResolvers,
+  Resolvers,
 } from "src/generated/resolvers-types"
-import Items, { Item, ItemsLoader } from "src/resolvers/items/items"
+import { dateScalar } from "src/resolvers/scalars.resolve"
+import Items, { Item } from "src/resolvers/items/items.resolve"
+import { ItemsLoader } from "src/resolvers/items/items.repo"
+import { getContext } from "src/utils/context"
 
 const packageJson = require("../package.json")
 
@@ -19,7 +23,7 @@ function loadGQL(filename: string) {
 const typeDefs = loadGQL("./schema.gql")
 
 const Query: QueryResolvers = {
-  version: () => packageJson["version"],
+  version: (_, __, ctx) => packageJson["version"] + "-" + ctx.decodedToken?.uid,
   ...Items.Query,
 }
 
@@ -27,24 +31,27 @@ const Mutation: MutationResolvers = {
   ...Items.Mutation,
 }
 
-const resolvers = {
-  Query,
-  Mutation,
-
+const typeResolvers: RecursivePartial<Resolvers> = {
   Item,
 }
 
 const context = (ctx: ExpressContext) => ({
-  date: new Date(),
   loaders: {
-    items: ItemsLoader(),
+    items: new ItemsLoader(),
   },
+  ...(getContext(ctx.req) || {}),
+  ...ctx,
 })
 
 export type RequestContext = ReturnType<typeof context>
 
 export const server = new ApolloServer({
   typeDefs,
-  resolvers,
+  resolvers: {
+    Query,
+    Mutation,
+    ...typeResolvers,
+    Date: dateScalar,
+  },
   context,
 })

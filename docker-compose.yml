@@ -13,6 +13,19 @@ services:
       - ./frontend:/app
       - ./backend/src/schema.gql:/backend/src/schema.gql
 
+  storybook:
+    container_name: storybook
+    restart: on-failure
+    build:
+      context: ./frontend
+      dockerfile: dev.Dockerfile
+    ports:
+      - 6006:6006
+    volumes:
+      - ./frontend:/app
+      - ./backend/src/schema.gql:/backend/src/schema.gql
+    command: "npm run storybook"
+
   codegen-frontend:
     container_name: codegen-frontend
     restart: on-failure
@@ -34,10 +47,13 @@ services:
       - mongo
     ports:
       - 4001:4001
+      - 9229:9229
     environment:
       - MONGO_CONNECTION=mongodb://mongo:27017
     volumes:
       - ./backend:/app
+    env_file:
+      - ./backend/private/firebase.env
 
   codegen-backend:
     container_name: codegen-backend

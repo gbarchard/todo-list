@@ -12,3 +12,6 @@ generates:
       reactApolloVersion: 3
       withHooks: true
       strictScalars: true
+      scalars:
+        Date: Date
+        URLString: string

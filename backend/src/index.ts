@@ -1,3 +1,5 @@
+import "core-js/stable"
+import "regenerator-runtime/runtime"
 import { startServer, stopServer } from "./server"
 import { Mongo } from "./utils/mongo"
 
@@ -31,6 +33,7 @@ process.on("SIGUSR2", exitHandler.bind(null, { exit: true }))
 
 //catches uncaught exceptions
 process.on("uncaughtException", exitHandler.bind(null, { exit: true }))
+process.on("unhandledRejection", exitHandler.bind(null, { exit: true }))
 
 // SERVE
 async function start() {

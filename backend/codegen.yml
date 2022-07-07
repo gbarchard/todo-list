@@ -6,7 +6,7 @@ generates:
       avoidOptionals: true
       contextType: src/apollo#RequestContext
       mappers:
-        Item: src/resolvers/items/itemModels#ItemModel
+        Item: src/resolvers/items/items.model#ItemModel
     plugins:
       - typescript
       - typescript-resolvers

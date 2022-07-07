@@ -1,3 +1,5 @@
+scalar Date
+
 type Query {
   version: String!
   items: [Item!]!
@@ -10,5 +12,7 @@ type Mutation {
 
 type Item {
   id: ID!
+  slug: String!
   name: String
+  createdDate: Date
 }

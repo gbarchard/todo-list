@@ -1,19 +1,21 @@
 version: "3.9"
 
-# **** NOT FOR ACTUAL PROD USE *****
-
 services:
   backend:
+    image: <repo>/backend:main
     container_name: backend
-    build:
-      context: ./backend
     depends_on:
       - mongo
     ports:
       - 4001:4001
+    volumes:
+      - ./volumes/private:/app/private
+      - ./volumes/logs:/app/logs
     environment:
       - MONGO_CONNECTION=mongodb://mongo:27017
-  
+    env_file:
+      - ./backend/private/firebase.env
+
   mongo:
     image: mongo:5.0.3
     container_name: mongo
@@ -22,11 +24,10 @@ services:
     volumes:
       - ./volumes/data/db:/data/db
     command: --quiet --logpath /dev/null
-  
+
   nginx:
+    image: <repo>/proxy:main
     container_name: nginx
     restart: on-failure
-    build:
-      dockerfile: ./proxy/Dockerfile
     ports:
       - 8080:8080

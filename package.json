@@ -7,10 +7,20 @@
     "@playlyfe/gql": "^2.6.2",
     "@typescript-eslint/eslint-plugin": "^5.3.1",
     "@typescript-eslint/parser": "^5.3.1",
-    "eslint": "^8.2.0",
+    "eslint": "^7.11.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.27.0",
     "prettier": "^2.4.1"
+  },
+  "scripts": {
+    "setup": "npm i && cd frontend && npm i && cd ../backend && npm i",
+    "start": "docker compose up",
+    "start:build": "docker compose up --build"
+  },
+  "engines": {
+    "node": "14",
+    "npm": "6",
+    "docker": "20.10"
   }
 }

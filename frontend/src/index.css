@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/**
+ * Convenience classes that automatically apply Dark Mode styles
+ */
+
+.bg-colored {
+  @apply bg-white dark:bg-e-gray-29;
+}
+
+.border-colored {
+  @apply border-gray-200;
+}
+
+.text-colored {
+  @apply text-gray-900 dark:text-gray-100;
+}

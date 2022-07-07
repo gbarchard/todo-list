@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+    depends_on:
+      - mongo
+    ports:
+      - 4001:4001
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/private/firebase-service-cert.json
+      - MONGO_CONNECTION=mongodb://mongo:27017
+
+  mongo:
+    image: mongo:5.0.3
+    container_name: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./volumes/data/db:/data/db
+    command: --quiet --logpath /dev/null
+
+  nginx:
+    container_name: nginx
+    restart: on-failure
+    build:
+      dockerfile: ./proxy/Dockerfile
+    ports:
+      - 8080:8080

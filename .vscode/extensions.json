@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "naumovs.color-highlight",
+    "ms-azuretools.vscode-docker",
+    "dbaeumer.vscode-eslint",
+    "kumar-harsh.graphql-for-vscode",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "eamodio.gitlens",
+    "aaron-bond.better-comments",
+    "formulahendry.auto-rename-tag",
+    "stevencl.adddoccomments"
+  ]
+}

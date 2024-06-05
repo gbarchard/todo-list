@@ -14,7 +14,7 @@
     "prettier": "^2.4.1"
   },
   "scripts": {
-    "setup": "npm i && cd frontend && npm i && cd ../backend && npm i",
+    "setup": "npm i && cd frontend && npm i --legacy-peer-deps && cd ../backend && npm i --legacy-peer-deps",
     "start": "docker compose up",
     "start:build": "docker compose up --build"
   },

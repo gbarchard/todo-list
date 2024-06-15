@@ -13,19 +13,6 @@ services:
       - ./frontend:/app
       - ./backend/src/schema.gql:/backend/src/schema.gql
 
-  # storybook:
-  #   container_name: storybook
-  #   restart: on-failure
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: dev.Dockerfile
-  #   ports:
-  #     - 6006:6006
-  #   volumes:
-  #     - ./frontend:/app
-  #     - ./backend/src/schema.gql:/backend/src/schema.gql
-  #   command: "npm run storybook"
-
   codegen-frontend:
     container_name: codegen-frontend
     restart: on-failure

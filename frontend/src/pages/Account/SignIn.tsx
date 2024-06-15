@@ -1,18 +1,22 @@
-import React, { FormEvent, useState } from "react"
-import { LockClosedIcon } from "@heroicons/react/solid"
-import { Link, useNavigate } from "react-router-dom"
+import React, { FormEvent, useState } from 'react'
+import { LockClosedIcon } from '@heroicons/react/solid'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   browserSessionPersistence,
   browserLocalPersistence,
   setPersistence,
   signInWithEmailAndPassword,
-} from "firebase/auth"
+  GoogleAuthProvider,
+  signInWithPopup,
+} from 'firebase/auth'
 
-import { auth } from "src/utils/firebase"
-import { BottomTextInput, TopTextInput } from "src/components/atoms/TextInput"
-import { firebaseErrorMsg, useGoToAppWhenLoggedIn } from "src/utils/auth"
-import { LogoHeader } from "src/components/Logo"
-import PublicDarkModeToggle from "src/components/molecules/PublicPageDarkModeToggle"
+import { auth } from 'src/utils/firebase'
+import { BottomTextInput, TopTextInput } from 'src/components/atoms/TextInput'
+import { firebaseErrorMsg, useGoToAppWhenLoggedIn } from 'src/utils/auth'
+import { LogoHeader } from 'src/components/Logo'
+import PublicDarkModeToggle from 'src/components/molecules/PublicPageDarkModeToggle'
+
+const googleProvider = new GoogleAuthProvider()
 
 export function SignIn() {
   const formRef = React.useRef<HTMLFormElement>(null)
@@ -28,22 +32,22 @@ export function SignIn() {
       if (!formRef.current) return
 
       const data = new FormData(formRef.current)
-      const email = data.get("email")
-      const pass = data.get("password")
-      const remember = data.get("remember") === "on"
+      const email = data.get('email')
+      const pass = data.get('password')
+      const remember = data.get('remember') === 'on'
 
-      if (typeof email == "string" && typeof pass == "string") {
+      if (typeof email == 'string' && typeof pass == 'string') {
         try {
           const persistence = remember
             ? browserLocalPersistence
             : browserSessionPersistence
           await setPersistence(auth, persistence)
           await signInWithEmailAndPassword(auth, email, pass)
-          navigate("/app")
+          navigate('/app')
         } catch (e: any) {
-          console.error("error logging in", e)
+          console.error('error logging in', e)
           if (e?.code) setError(firebaseErrorMsg(e))
-          else setError("Unable to login")
+          else setError('Unable to login')
         }
       }
     },
@@ -72,6 +76,9 @@ export function SignIn() {
               <ForgotPasswordButton />
             </div>
 
+            <button onClick={() => signInWithPopup(auth, googleProvider)}>
+              Sign In With Google
+            </button>
             <SignInButton />
             <SignUpLink />
           </form>

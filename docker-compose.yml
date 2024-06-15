@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   frontend:
     container_name: frontend
@@ -56,7 +54,8 @@ services:
     image: mongo:5.0.3
     container_name: mongo
     ports:
-      - 27017:27017
+      # - 27017:27017
+      - '127.0.0.1:27017:27017'
     volumes:
       - ./volumes/data/db:/data/db
     command: --quiet --logpath /dev/null

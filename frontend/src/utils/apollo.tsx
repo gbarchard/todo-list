@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 
 import {
   ApolloClient,
@@ -7,9 +7,9 @@ import {
   HttpLink,
   ApolloLink,
   concat,
-} from "@apollo/client"
-import { onError } from "@apollo/client/link/error"
-import { logout, useAuthContext } from "./auth"
+} from '@apollo/client'
+import { onError } from '@apollo/client/link/error'
+import { logout, useAuthContext } from './auth'
 
 export function Apollo(props: React.PropsWithChildren<{}>) {
   const auth = useAuthContext()
@@ -22,7 +22,7 @@ export function Apollo(props: React.PropsWithChildren<{}>) {
     const logoutLink = onError(({ networkError }) => {
       if (
         networkError &&
-        "statusCode" in networkError &&
+        'statusCode' in networkError &&
         networkError.statusCode === 401
       ) {
         logout()

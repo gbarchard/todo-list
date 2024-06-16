@@ -1,28 +1,28 @@
-import { ObjectId } from "bson"
-import { Collection } from "mongodb"
+import { ObjectId } from 'bson'
+import { Collection } from 'mongodb'
 
 import {
   ItemResolvers,
   MutationResolvers,
   QueryResolvers,
-} from "src/generated/resolvers-types"
+} from 'src/generated/resolvers-types'
 
-import { _id } from "src/utils/mongo"
-import { ItemModel } from "./items.model"
-import { itemsColl } from "./items.repo"
-import { makeItem } from "./items.util"
+import { _id } from 'src/utils/mongo'
+import { ItemModel } from './items.model'
+import { itemsColl } from './items.repo'
+import { makeItem } from './items.util'
 
 export const Item: Partial<ItemResolvers> = {
   id: _id,
 }
 
-export const Query: Pick<QueryResolvers, "items"> = {
+export const Query: Pick<QueryResolvers, 'items'> = {
   items: () => {
     return itemsColl().find<ItemModel>({}).toArray()
   },
 }
 
-export const Mutation: Pick<MutationResolvers, "addItem" | "deleteItem"> = {
+export const Mutation: Pick<MutationResolvers, 'addItem' | 'deleteItem'> = {
   addItem: async (_, { name }, { userId }) => {
     if (!userId) return null
 

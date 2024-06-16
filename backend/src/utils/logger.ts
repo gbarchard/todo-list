@@ -1,5 +1,5 @@
-import winston from "winston"
-import expressWinston from "express-winston"
+import winston from 'winston'
+import expressWinston from 'express-winston'
 
 const baseFormats = [winston.format.timestamp(), winston.format.simple()]
 
@@ -11,26 +11,26 @@ const consoleFormat = winston.format.combine(
 const fileFormat = winston.format.combine(...baseFormats)
 
 const transports =
-  process.env.NODE_ENV !== "production"
+  process.env.NODE_ENV !== 'production'
     ? [
         new winston.transports.Console({
-          level: process.env.LOG_LEVEL || "info",
+          level: process.env.LOG_LEVEL || 'info',
           format: consoleFormat,
         }),
       ]
     : [
         new winston.transports.Console({
-          level: process.env.LOG_LEVEL || "info",
+          level: process.env.LOG_LEVEL || 'info',
           format: consoleFormat,
         }),
         new winston.transports.File({
-          filename: "logs/error.log",
-          level: "error",
+          filename: 'logs/error.log',
+          level: 'error',
           format: fileFormat,
         }),
         new winston.transports.File({
-          filename: "logs/combined.log",
-          level: process.env.LOG_LEVEL || "info",
+          filename: 'logs/combined.log',
+          level: process.env.LOG_LEVEL || 'info',
           format: fileFormat,
         }),
       ]
@@ -43,7 +43,7 @@ export const expressLogger = expressWinston.logger({
   winstonInstance: logger,
   meta: false,
   colorize: false,
-  msg: "HTTP {{req.method}} {{res.statusCode}} {{res.responseTime}}ms {{req.url}}",
+  msg: 'HTTP {{req.method}} {{res.statusCode}} {{res.responseTime}}ms {{req.url}}',
   ignoreRoute: function (req, res) {
     return false
   },
@@ -53,5 +53,5 @@ export const expressLogger = expressWinston.logger({
 export const expressErrorLogger = expressWinston.errorLogger({
   winstonInstance: logger,
   meta: false,
-  msg: "Error {{err.message}} {{err.stack}}",
+  msg: 'Error {{err.message}} {{err.stack}}',
 })

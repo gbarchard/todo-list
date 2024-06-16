@@ -16,11 +16,16 @@
   "scripts": {
     "setup": "npm i && cd frontend && npm i --legacy-peer-deps && cd ../backend && npm i --legacy-peer-deps",
     "start": "docker compose up",
-    "start:build": "docker compose up --build"
+    "start:build": "docker compose up --build",
+    "pretty": "prettier --write \"./**/*.{js,jsx,mjs,cjs,ts,tsx,json}\""
   },
   "engines": {
     "node": "14",
     "npm": "6",
     "docker": "20.10"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
   }
 }

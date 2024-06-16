@@ -1,13 +1,13 @@
-import { PropsWithChildren } from "react"
-import { Fragment, useState } from "react"
-import { Dialog, Transition } from "@headlessui/react"
-import { MenuIcon, XIcon, ViewGridIcon } from "@heroicons/react/outline"
-import { Link, useLocation } from "react-router-dom"
+import { PropsWithChildren } from 'react'
+import { Fragment, useState } from 'react'
+import { Dialog, Transition } from '@headlessui/react'
+import { MenuIcon, XIcon, ViewGridIcon } from '@heroicons/react/outline'
+import { Link, useLocation } from 'react-router-dom'
 
-import DarkModeToggle from "src/components/atoms/DarkModeToggle"
-import { useAuthContext } from "src/utils/auth"
+import DarkModeToggle from 'src/components/atoms/DarkModeToggle'
+import { useAuthContext } from 'src/utils/auth'
 
-const navigation = [{ name: "Home", href: "/app/home", icon: ViewGridIcon }]
+const navigation = [{ name: 'Home', href: '/app/home', icon: ViewGridIcon }]
 
 function useCurrentNavigation() {
   const location = useLocation()
@@ -15,7 +15,7 @@ function useCurrentNavigation() {
 }
 
 function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ")
+  return classes.filter(Boolean).join(' ')
 }
 
 export default function PageWrapper(props: PropsWithChildren<{}>) {
@@ -142,17 +142,17 @@ function NavList() {
             to={item.href}
             className={classNames(
               item.name === currentName
-                ? "bg-gray-100 text-gray-900 dark:text-e-gray-30 dark:hover:text-e-gray-30 dark:bg-gray-300"
-                : "text-gray-600 dark:text-e-gray-10 hover:bg-gray-50 dark:hover:bg-gray-100 dark:hover:text-e-gray-30",
-              "group flex items-center px-2 py-2 text-base font-medium rounded-md "
+                ? 'bg-gray-100 text-gray-900 dark:text-e-gray-30 dark:hover:text-e-gray-30 dark:bg-gray-300'
+                : 'text-gray-600 dark:text-e-gray-10 hover:bg-gray-50 dark:hover:bg-gray-100 dark:hover:text-e-gray-30',
+              'group flex items-center px-2 py-2 text-base font-medium rounded-md '
             )}
           >
             <item.icon
               className={classNames(
                 item.name === currentName
-                  ? "text-gray-500"
-                  : "text-gray-400 group-hover:text-gray-500",
-                "mr-4 flex-shrink-0 h-6 w-6"
+                  ? 'text-gray-500'
+                  : 'text-gray-400 group-hover:text-gray-500',
+                'mr-4 flex-shrink-0 h-6 w-6'
               )}
               aria-hidden="true"
             />
@@ -178,7 +178,7 @@ function UserProfile() {
               <img
                 className="inline-block h-10 w-10 rounded-full"
                 src={user.photoURL}
-                alt={user.displayName || "Unknown User"}
+                alt={user.displayName || 'Unknown User'}
               />
             ) : (
               <InitialsCircle name={user.displayName} />
@@ -186,7 +186,7 @@ function UserProfile() {
           </div>
           <div className="ml-3">
             <p className="text-base font-medium text-gray-700 group-hover:text-gray-900 dark:text-e-gray-10">
-              {user.displayName || "Unknown User"}
+              {user.displayName || 'Unknown User'}
             </p>
             <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700 dark:text-e-orange-20">
               View profile
@@ -202,11 +202,11 @@ function UserProfile() {
 }
 
 function InitialsCircle(props: { name?: string | null }) {
-  const names = (props.name || "Unknown User").split(" ")
+  const names = (props.name || 'Unknown User').split(' ')
   const initials = names
     .map((name) => name[0])
     .slice(0, 2)
-    .join("")
+    .join('')
 
   return (
     <div className="flex flex-col justify-center items-center inline-block h-10 w-10 rounded-full bg-e-gray-10 text-lg">

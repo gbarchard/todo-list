@@ -1,15 +1,15 @@
-import chai from "chai"
-import faker from "@faker-js/faker"
-import { ObjectId } from "mongodb"
-import sinon from "sinon"
-import "sinon-mongo"
+import chai from 'chai'
+import faker from '@faker-js/faker'
+import { ObjectId } from 'mongodb'
+import sinon from 'sinon'
+import 'sinon-mongo'
 
-import * as itemsRepo from "src/resolvers/items/items.repo"
-import { makeFakeUserId } from "src/utils/testing"
+import * as itemsRepo from 'src/resolvers/items/items.repo'
+import { makeFakeUserId } from 'src/utils/testing'
 
 const { expect } = chai
 
-describe("items.repo", async function () {
+describe('items.repo', async function () {
   let mockCollection: { findOne: sinon.SinonSpy<any, any> }
   this.beforeEach(async function () {
     const sandbox = sinon.createSandbox()
@@ -17,14 +17,14 @@ describe("items.repo", async function () {
     // @ts-ignore
     mockCollection = sinon.mongo.collection()
 
-    sandbox.stub(itemsRepo, "coll").value(mockCollection)
+    sandbox.stub(itemsRepo, 'coll').value(mockCollection)
   })
 
   const objectIdStr = new ObjectId(faker.datatype.number()).toHexString()
   const userIdStr = makeFakeUserId()
 
-  describe("getItemBy can find by:", async function () {
-    it("id", async function () {
+  describe('getItemBy can find by:', async function () {
+    it('id', async function () {
       await itemsRepo.getItemBy.id(objectIdStr, userIdStr)
 
       sinon.assert.calledOnce(mockCollection.findOne)
@@ -33,7 +33,7 @@ describe("items.repo", async function () {
       expect(_id).instanceOf(ObjectId)
     })
 
-    it("slug", async function () {
+    it('slug', async function () {
       const slug = faker.datatype.string(6)
       await itemsRepo.getItemBy.slug(slug, userIdStr)
 
@@ -44,8 +44,8 @@ describe("items.repo", async function () {
     })
   })
 
-  describe("getItemBy.id()", function () {
-    it("coerces a string-valued _id to an ObjectId", async function () {
+  describe('getItemBy.id()', function () {
+    it('coerces a string-valued _id to an ObjectId', async function () {
       await itemsRepo.getItemBy.id(objectIdStr, userIdStr)
 
       sinon.assert.calledOnce(mockCollection.findOne)
@@ -55,8 +55,8 @@ describe("items.repo", async function () {
     })
   })
 
-  describe("itemsLoader", function () {
-    it("only calls repo once", async function () {
+  describe('itemsLoader', function () {
+    it('only calls repo once', async function () {
       const loader = new itemsRepo.ItemsLoader()
 
       await loader.id(objectIdStr, userIdStr)

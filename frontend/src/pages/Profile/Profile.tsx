@@ -1,10 +1,10 @@
-import React from "react"
-import { useVersionQuery } from "src/generated/graphql"
+import React from 'react'
+import { useVersionQuery } from 'src/generated/graphql'
 
-import { LockClosedIcon } from "@heroicons/react/solid"
-import { signOut } from "firebase/auth"
-import { auth } from "src/utils/firebase"
-import { Row } from "src/components/atoms/Row"
+import { LockClosedIcon } from '@heroicons/react/solid'
+import { signOut } from 'firebase/auth'
+import { auth } from 'src/utils/firebase'
+import { Row } from 'src/components/atoms/Row'
 
 export function Profile() {
   const { data } = useVersionQuery()

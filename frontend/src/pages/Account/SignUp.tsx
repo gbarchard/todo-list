@@ -1,21 +1,21 @@
-import React, { FormEvent } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import React, { FormEvent } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
   updateProfile,
-} from "firebase/auth"
+} from 'firebase/auth'
 
-import { auth } from "src/utils/firebase"
+import { auth } from 'src/utils/firebase'
 import {
   BottomTextInput,
   ConfirmPasswordInput,
   TextInput,
   TopTextInput,
-} from "src/components/atoms/TextInput"
-import { useGoToAppWhenLoggedIn } from "src/utils/auth"
-import { LogoHeader } from "src/components/Logo"
-import PublicDarkModeToggle from "src/components/molecules/PublicPageDarkModeToggle"
+} from 'src/components/atoms/TextInput'
+import { useGoToAppWhenLoggedIn } from 'src/utils/auth'
+import { LogoHeader } from 'src/components/Logo'
+import PublicDarkModeToggle from 'src/components/molecules/PublicPageDarkModeToggle'
 
 export function SignUp() {
   const formRef = React.useRef<HTMLFormElement>(null)
@@ -31,28 +31,28 @@ export function SignUp() {
       if (!formRef.current) return
 
       const data = new FormData(formRef.current)
-      const email = data.get("email")
-      const pass = data.get("password")
-      const repeatPass = data.get("repeat-password")
+      const email = data.get('email')
+      const pass = data.get('password')
+      const repeatPass = data.get('repeat-password')
 
-      const firstName = data.get("first-name")
-      const lastName = data.get("last-name")
+      const firstName = data.get('first-name')
+      const lastName = data.get('last-name')
 
       if (pass !== repeatPass) {
-        setError("Passwords do not match")
-      } else if (typeof email == "string" && typeof pass == "string") {
+        setError('Passwords do not match')
+      } else if (typeof email == 'string' && typeof pass == 'string') {
         try {
           const res = await createUserWithEmailAndPassword(auth, email, pass)
           await updateProfile(res.user, {
-            displayName: firstName?.toString() || "Unknown",
+            displayName: firstName?.toString() || 'Unknown',
           })
 
           await sendEmailVerification(res.user)
 
           // TODO: Send firstName/lastName to server
-          navigate("/signin")
+          navigate('/signin')
         } catch (e) {
-          console.error("Error logging in", e)
+          console.error('Error logging in', e)
         }
       }
     },

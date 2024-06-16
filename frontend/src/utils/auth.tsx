@@ -1,13 +1,13 @@
-import React, { useContext, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import React, { useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   onAuthStateChanged,
   User,
   AuthError,
   AuthErrorCodes,
-} from "firebase/auth"
+} from 'firebase/auth'
 
-import { auth } from "./firebase"
+import { auth } from './firebase'
 
 interface AuthState {
   user: User
@@ -33,12 +33,12 @@ export function AuthContextProvider(props: React.PropsWithChildren<{}>) {
             .getIdToken()
             .then((token) => setAuthState({ user: maybeUser, token }))
             .catch((e) => {
-              console.error("Error getting token", e)
+              console.error('Error getting token', e)
               setAuthState(null)
             })
         } else {
-          if (window.location.href.includes("/app"))
-            window.location.href = "/signin"
+          if (window.location.href.includes('/app'))
+            window.location.href = '/signin'
           setAuthState(null)
         }
       }),
@@ -62,7 +62,7 @@ export function useGoToAppWhenLoggedIn() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (auth?.user) navigate("/app")
+    if (auth?.user) navigate('/app')
   }, [auth, navigate])
 }
 
@@ -77,10 +77,10 @@ export function firebaseErrorMsg(error: AuthError, defaultMsg?: string) {
   switch (error.code) {
     case AuthErrorCodes.INVALID_PASSWORD:
     case AuthErrorCodes.INVALID_EMAIL:
-      return "Invalid email or password"
+      return 'Invalid email or password'
     case AuthErrorCodes.USER_DELETED:
-      return "User not found"
+      return 'User not found'
     default:
-      return defaultMsg || "Unable to log in"
+      return defaultMsg || 'Unable to log in'
   }
 }

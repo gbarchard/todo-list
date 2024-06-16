@@ -1,6 +1,6 @@
-import { Fragment, InputHTMLAttributes, PropsWithChildren } from "react"
-import cx from "classnames"
-import { Dialog, Transition } from "@headlessui/react"
+import { Fragment, InputHTMLAttributes, PropsWithChildren } from 'react'
+import cx from 'classnames'
+import { Dialog, Transition } from '@headlessui/react'
 
 export type ModalProps = {
   open: boolean
@@ -58,7 +58,7 @@ export function Modal(props: PropsWithChildren<ModalProps>) {
 Modal.Body = (props: InputHTMLAttributes<HTMLDivElement>) => (
   <div
     {...props}
-    className={cx("mt-4 sm:flex sm:items-start sm:flex-col", props.className)}
+    className={cx('mt-4 sm:flex sm:items-start sm:flex-col', props.className)}
   >
     {props.children}
   </div>
@@ -67,7 +67,7 @@ Modal.Body = (props: InputHTMLAttributes<HTMLDivElement>) => (
 Modal.ButtonFooter = (props: InputHTMLAttributes<HTMLDivElement>) => (
   <div
     {...props}
-    className={cx("mt-6 sm:flex sm:flex-row justify-between", props.className)}
+    className={cx('mt-6 sm:flex sm:flex-row justify-between', props.className)}
   >
     {props.children}
   </div>

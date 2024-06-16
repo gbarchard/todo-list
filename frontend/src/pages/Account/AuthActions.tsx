@@ -4,29 +4,29 @@ import {
   confirmPasswordReset,
   sendPasswordResetEmail,
   verifyPasswordResetCode,
-} from "firebase/auth"
-import { FormEvent, useCallback, useEffect, useRef, useState } from "react"
-import { useNavigate, useSearchParams } from "react-router-dom"
-import { OrangeButton } from "src/components/atoms/Button"
-import { ConfirmPasswordInput } from "src/components/atoms/TextInput"
+} from 'firebase/auth'
+import { FormEvent, useCallback, useEffect, useRef, useState } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { OrangeButton } from 'src/components/atoms/Button'
+import { ConfirmPasswordInput } from 'src/components/atoms/TextInput'
 
-import { LogoHeader } from "src/components/Logo"
-import { useAuthContext } from "src/utils/auth"
-import { auth } from "src/utils/firebase"
-import { BackToSignIn, SuccessfulMessage } from "./NavigationLinks"
+import { LogoHeader } from 'src/components/Logo'
+import { useAuthContext } from 'src/utils/auth'
+import { auth } from 'src/utils/firebase'
+import { BackToSignIn, SuccessfulMessage } from './NavigationLinks'
 
 export function AuthActions() {
   const navigate = useNavigate()
   const [params] = useSearchParams()
 
-  const mode = params.get("mode")
-  const actionCode = params.get("oobCode")
-  const continueUrl = params.get("continueUrl")
+  const mode = params.get('mode')
+  const actionCode = params.get('oobCode')
+  const continueUrl = params.get('continueUrl')
 
   const { title, Handler } = useAuthHandler(mode)
 
   useEffect(() => {
-    if (!Handler) navigate("/signin")
+    if (!Handler) navigate('/signin')
   }, [Handler, navigate])
 
   if (!Handler) return null
@@ -42,7 +42,7 @@ export function AuthActions() {
 }
 
 function useAuthHandler(mode?: string | null) {
-  let title = "Redirecting..."
+  let title = 'Redirecting...'
   let Handler:
     | ((props: {
         actionCode?: string | null
@@ -51,20 +51,20 @@ function useAuthHandler(mode?: string | null) {
     | null = null
 
   switch (mode) {
-    case "resetPassword":
+    case 'resetPassword':
       // Display reset password handler and UI.
       Handler = ResetPassword
-      title = "Reset your password"
+      title = 'Reset your password'
       break
-    case "recoverEmail":
+    case 'recoverEmail':
       // Display email recovery handler and UI.
       Handler = RestoreEmail
-      title = "Restore your email"
+      title = 'Restore your email'
       break
-    case "verifyEmail":
+    case 'verifyEmail':
       // Display email verification handler and UI.
       Handler = VerifyEmail
-      title = "Verifying your email"
+      title = 'Verifying your email'
       break
   }
 
@@ -88,23 +88,23 @@ function ResetPassword(props: {
       if (!formRef.current) return
 
       const data = new FormData(formRef.current)
-      const pass = data.get("password")
-      const repeatPass = data.get("repeat-password")
+      const pass = data.get('password')
+      const repeatPass = data.get('repeat-password')
 
-      if (typeof pass !== "string" || pass !== repeatPass) {
-        setError("Passwords do not match")
+      if (typeof pass !== 'string' || pass !== repeatPass) {
+        setError('Passwords do not match')
         return
       }
 
       setLoading(true)
       try {
-        if (!code) throw new Error("Invalid auth code")
+        if (!code) throw new Error('Invalid auth code')
         await verifyPasswordResetCode(auth, code)
         await confirmPasswordReset(auth, code, pass)
         setComplete(true)
       } catch (error) {
-        console.error("Unable to reset password", error)
-        setError("Unable to reset password, please try again later.")
+        console.error('Unable to reset password', error)
+        setError('Unable to reset password, please try again later.')
       } finally {
         setLoading(false)
       }
@@ -154,7 +154,7 @@ function RestoreEmail(props: {
   const restoreEmail = useCallback(async () => {
     setLoading(true)
     try {
-      if (!code) throw new Error("Invalid auth code")
+      if (!code) throw new Error('Invalid auth code')
       const info = await checkActionCode(auth, code)
       await applyActionCode(auth, code)
 
@@ -162,8 +162,8 @@ function RestoreEmail(props: {
       if (restoredEmail) await sendPasswordResetEmail(auth, restoredEmail)
       setComplete(true)
     } catch (error) {
-      console.error("Unable to restore email", error)
-      setError("Unable to restore email, please try again later.")
+      console.error('Unable to restore email', error)
+      setError('Unable to restore email, please try again later.')
     } finally {
       setLoading(false)
     }
@@ -207,13 +207,13 @@ function VerifyEmail(props: {
   const verifyEmail = useCallback(async () => {
     setLoading(true)
     try {
-      if (!code) throw new Error("Invalid auth code")
+      if (!code) throw new Error('Invalid auth code')
       await applyActionCode(auth, code)
       await authContext?.user.reload()
       setComplete(true)
     } catch (error) {
-      console.error("Unable to verify email", error)
-      setError("Unable to verify email, please try again later.")
+      console.error('Unable to verify email', error)
+      setError('Unable to verify email, please try again later.')
     } finally {
       setLoading(false)
     }

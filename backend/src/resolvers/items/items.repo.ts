@@ -1,11 +1,11 @@
-import { ObjectId } from "bson"
-import { Collection } from "mongodb"
-import { ObjectIdLike, Slug, UserId } from "src/general.types"
+import { ObjectId } from 'bson'
+import { Collection } from 'mongodb'
+import { ObjectIdLike, Slug, UserId } from 'src/general.types'
 
-import { _id, Mongo, fnLoader } from "src/utils/mongo"
-import { ItemModel } from "./items.model"
+import { _id, Mongo, fnLoader } from 'src/utils/mongo'
+import { ItemModel } from './items.model'
 
-const ITEMS_COLLECTION = "items"
+const ITEMS_COLLECTION = 'items'
 
 export let coll: Collection<ItemModel> | null = null
 export function itemsColl() {
@@ -17,7 +17,7 @@ export function itemsColl() {
 
 export const getItemBy = {
   id: async (id: ObjectIdLike, userId: UserId) => {
-    const deckId = typeof id == "string" ? new ObjectId(id) : id
+    const deckId = typeof id == 'string' ? new ObjectId(id) : id
     return itemsColl().findOne<ItemModel>({ _id: deckId, ownerId: userId })
   },
   slug: async (slug: Slug, userId: UserId) => {

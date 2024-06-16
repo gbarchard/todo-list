@@ -1,4 +1,4 @@
-import { ObjectId } from "mongodb"
+import { ObjectId } from 'mongodb'
 
 export type URLString = string
 export type ObjectIdLike = string | ObjectId

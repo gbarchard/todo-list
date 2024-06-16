@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react"
+import { InputHTMLAttributes } from 'react'
 
 export type HTMLDivProps = React.PropsWithChildren<
   InputHTMLAttributes<HTMLDivElement>

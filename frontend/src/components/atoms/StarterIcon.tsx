@@ -1,7 +1,7 @@
-import React from "react"
+import React from 'react'
 
-const defaultIconColor: string = "#31343F"
-const defaultIconSize: string = "20px"
+const defaultIconColor: string = '#31343F'
+const defaultIconSize: string = '20px'
 
 /**
  * @description Available component properties for StarterIcon components
@@ -9,7 +9,7 @@ const defaultIconSize: string = "20px"
  * @property {string} [iconColor] - css color value for icon strokes
  * @property {string} [iconSize] - css height and width for icon
  */
-export interface IconProps extends React.ComponentProps<"svg"> {
+export interface IconProps extends React.ComponentProps<'svg'> {
   iconColor?: string
   iconSize?: string
 }

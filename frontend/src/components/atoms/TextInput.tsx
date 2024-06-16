@@ -1,5 +1,5 @@
-import cx from "classnames"
-import React, { ChangeEvent, InputHTMLAttributes } from "react"
+import cx from 'classnames'
+import React, { ChangeEvent, InputHTMLAttributes } from 'react'
 
 export type TextInputChangeEvent = ChangeEvent<HTMLInputElement>
 
@@ -13,7 +13,7 @@ export function TextInput(props: TextInputProps) {
   return (
     <div
       {...props.containerProps}
-      className={cx("w-full", props.containerProps?.className)}
+      className={cx('w-full', props.containerProps?.className)}
     >
       {props.label && (
         <label
@@ -25,10 +25,10 @@ export function TextInput(props: TextInputProps) {
       )}
       <div className="w-full">
         <input
-          type={props.isSensitive ? "password" : "text"}
+          type={props.isSensitive ? 'password' : 'text'}
           {...props}
           className={cx(
-            "appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 dark:text-white-900 text-gray-900  rounded-md focus:outline-none focus:ring-e-blue-20 focus:border-e-blue-20 focus:z-10 sm:text-sm",
+            'appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 dark:text-white-900 text-gray-900  rounded-md focus:outline-none focus:ring-e-blue-20 focus:border-e-blue-20 focus:z-10 sm:text-sm',
             props.className
           )}
         />
@@ -38,18 +38,18 @@ export function TextInput(props: TextInputProps) {
 }
 
 export const TopTextInput = (props: TextInputProps) => (
-  <TextInput {...props} className={cx("rounded-b-none", props.className)} />
+  <TextInput {...props} className={cx('rounded-b-none', props.className)} />
 )
 
 export const MiddleTextInput = (props: TextInputProps) => (
   <TextInput
     {...props}
-    className={cx("rounded-b-none", "rounded-t-none", props.className)}
+    className={cx('rounded-b-none', 'rounded-t-none', props.className)}
   />
 )
 
 export const BottomTextInput = (props: TextInputProps) => (
-  <TextInput {...props} className={cx("rounded-t-none", props.className)} />
+  <TextInput {...props} className={cx('rounded-t-none', props.className)} />
 )
 
 export function ConfirmPasswordInput() {

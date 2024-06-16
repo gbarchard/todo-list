@@ -1,4 +1,4 @@
-import { format } from "date-fns"
+import { format } from 'date-fns'
 
 export function daysToMin(days: number) {
   return days * hrsToMin(24)
@@ -9,5 +9,5 @@ export function hrsToMin(hrs: number) {
 }
 
 export function makeDateKey(date: Date) {
-  return format(date, "yyyy-MM-dd")
+  return format(date, 'yyyy-MM-dd')
 }

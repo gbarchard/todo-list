@@ -1,5 +1,5 @@
-import { Request } from "express"
-import { DecodedIdToken } from "firebase-admin/auth"
+import { Request } from 'express'
+import { DecodedIdToken } from 'firebase-admin/auth'
 
 interface Context {
   decodedToken?: DecodedIdToken

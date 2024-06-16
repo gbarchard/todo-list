@@ -1,12 +1,12 @@
-import React, { FormEvent, useState } from "react"
-import { sendPasswordResetEmail } from "firebase/auth"
+import React, { FormEvent, useState } from 'react'
+import { sendPasswordResetEmail } from 'firebase/auth'
 
-import { TextInput } from "src/components/atoms/TextInput"
-import { firebaseErrorMsg, useGoToAppWhenLoggedIn } from "src/utils/auth"
-import { LogoHeader } from "src/components/Logo"
-import { OrangeButton } from "src/components/atoms/Button"
-import { auth } from "src/utils/firebase"
-import { BackToSignIn, SuccessfulMessage } from "./NavigationLinks"
+import { TextInput } from 'src/components/atoms/TextInput'
+import { firebaseErrorMsg, useGoToAppWhenLoggedIn } from 'src/utils/auth'
+import { LogoHeader } from 'src/components/Logo'
+import { OrangeButton } from 'src/components/atoms/Button'
+import { auth } from 'src/utils/firebase'
+import { BackToSignIn, SuccessfulMessage } from './NavigationLinks'
 
 export function ForgotPassword() {
   const formRef = React.useRef<HTMLFormElement>(null)
@@ -22,16 +22,16 @@ export function ForgotPassword() {
     if (!formRef.current) return
 
     const data = new FormData(formRef.current)
-    const email = data.get("email")
+    const email = data.get('email')
 
-    if (typeof email == "string") {
+    if (typeof email == 'string') {
       try {
         setLoading(true)
         // send reset email
         await sendPasswordResetEmail(auth, email)
       } catch (e: any) {
-        console.error("error sending password email")
-        setError(firebaseErrorMsg(e, "Error while trying to reset password"))
+        console.error('error sending password email')
+        setError(firebaseErrorMsg(e, 'Error while trying to reset password'))
       } finally {
         setLoading(false)
         setComplete(true)

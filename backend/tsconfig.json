@@ -6,9 +6,7 @@
     "baseUrl": ".",
     "target": "es5",
     "module": "commonjs",
-    "lib": [
-      "es6"
-    ],
+    "lib": ["es6"],
     "allowJs": true,
     "outDir": "build/src",
     "rootDir": "src",
@@ -22,7 +20,5 @@
     },
     "noEmit": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

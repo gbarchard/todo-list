@@ -3,7 +3,7 @@
  * @param object the object to remove undefined keys from
  */
 export function reduceObject<T>(object: Partial<T>): void {
-  Object.keys(object).forEach(key => {
+  Object.keys(object).forEach((key) => {
     if (object[key as keyof T] === undefined) {
       delete object[key as keyof T]
     }

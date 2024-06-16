@@ -1,4 +1,4 @@
-import React, { ChangeEvent, TextareaHTMLAttributes } from "react"
+import React, { ChangeEvent, TextareaHTMLAttributes } from 'react'
 
 export type TextAreaInputChangeEvent = ChangeEvent<HTMLTextAreaElement>
 

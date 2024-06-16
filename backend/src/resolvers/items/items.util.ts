@@ -1,7 +1,7 @@
-import { ObjectId } from "mongodb"
-import { UserId } from "src/general.types"
-import { makeSlug } from "src/utils/string"
-import { ItemModel } from "./items.model"
+import { ObjectId } from 'mongodb'
+import { UserId } from 'src/general.types'
+import { makeSlug } from 'src/utils/string'
+import { ItemModel } from './items.model'
 
 /**
  * Create an item object

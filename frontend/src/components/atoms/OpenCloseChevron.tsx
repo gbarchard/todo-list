@@ -1,4 +1,4 @@
-import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/outline"
+import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/outline'
 
 export type OpenCloseChevronProps = {
   /** whether to display the right or down Chevron icon */

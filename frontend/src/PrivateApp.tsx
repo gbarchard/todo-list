@@ -1,14 +1,14 @@
-import React from "react"
+import React from 'react'
 
-import { Route, Routes, Navigate } from "react-router-dom"
+import { Route, Routes, Navigate } from 'react-router-dom'
 
-import "./App.css"
+import './App.css'
 
-import PageWrapper from "src/components/organisms/PageWrapper"
-import { Profile } from "./pages/Profile/Profile"
-import { Home } from "./pages/Home/Home"
-import { useAuthContext } from "./utils/auth"
-import { LogoHeader } from "./components/Logo"
+import PageWrapper from 'src/components/organisms/PageWrapper'
+import { Profile } from './pages/Profile/Profile'
+import { Home } from './pages/Home/Home'
+import { useAuthContext } from './utils/auth'
+import { LogoHeader } from './components/Logo'
 
 function App() {
   const authContext = useAuthContext()

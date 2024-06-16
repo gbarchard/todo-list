@@ -1,13 +1,13 @@
-import React from "react"
+import React from 'react'
 import {
   useAddItemMutation,
   useDeleteItemMutation,
   useItemsQuery,
-} from "src/generated/graphql"
+} from 'src/generated/graphql'
 
 export function Home() {
   const { data } = useItemsQuery()
-  const [removeItem] = useDeleteItemMutation({ refetchQueries: ["Items"] })
+  const [removeItem] = useDeleteItemMutation({ refetchQueries: ['Items'] })
 
   const remove = React.useCallback(
     (id: string) => {
@@ -34,14 +34,14 @@ export function Home() {
 }
 
 function ItemForm() {
-  const [name, setName] = React.useState("")
+  const [name, setName] = React.useState('')
   const [addItem] = useAddItemMutation({
-    refetchQueries: ["Items"],
+    refetchQueries: ['Items'],
   })
 
   const add = React.useCallback(() => {
     if (name) addItem({ variables: { name } })
-    setName("")
+    setName('')
   }, [addItem, name])
 
   return (

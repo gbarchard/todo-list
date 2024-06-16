@@ -1,21 +1,21 @@
-import React from "react"
+import React from 'react'
 
 import {
   BrowserRouter as Router,
   Route,
   Routes,
   Navigate,
-} from "react-router-dom"
+} from 'react-router-dom'
 
-import "./App.css"
-import { AuthActions } from "./pages/Account/AuthActions"
-import { ForgotPassword } from "./pages/Account/ForgotPassword"
+import './App.css'
+import { AuthActions } from './pages/Account/AuthActions'
+import { ForgotPassword } from './pages/Account/ForgotPassword'
 
-import { SignIn } from "./pages/Account/SignIn"
-import { SignUp } from "./pages/Account/SignUp"
-import PrivateApp from "./PrivateApp"
-import { useAuthContext } from "./utils/auth"
-import { ThemeContextProvider } from "./utils/darkmode"
+import { SignIn } from './pages/Account/SignIn'
+import { SignUp } from './pages/Account/SignUp'
+import PrivateApp from './PrivateApp'
+import { useAuthContext } from './utils/auth'
+import { ThemeContextProvider } from './utils/darkmode'
 
 function App() {
   const authContext = useAuthContext()

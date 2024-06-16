@@ -1,10 +1,10 @@
-import DataLoader from "dataloader"
-import { Db, MongoClient, ObjectId } from "mongodb"
-import hash from "object-hash"
+import DataLoader from 'dataloader'
+import { Db, MongoClient, ObjectId } from 'mongodb'
+import hash from 'object-hash'
 
-const DEFAULT_DB = "default"
+const DEFAULT_DB = 'default'
 const client = new MongoClient(
-  process.env["MONGO_CONNECTION"] || "mongodb://mongo:27017"
+  process.env['MONGO_CONNECTION'] || 'mongodb://mongo:27017'
 )
 
 export class Mongo {
@@ -31,7 +31,7 @@ export class Mongo {
 }
 
 export function _id(doc: any) {
-  if (typeof doc == "object" && doc["_id"]) return doc["_id"]
+  if (typeof doc == 'object' && doc['_id']) return doc['_id']
   else return null
 }
 

@@ -1,18 +1,18 @@
-import { ExpressContext, ApolloServer, gql } from "apollo-server-express"
-import fs from "fs"
-import path from "path"
+import { ExpressContext, ApolloServer, gql } from 'apollo-server-express'
+import fs from 'fs'
+import path from 'path'
 
 import {
   MutationResolvers,
   QueryResolvers,
   Resolvers,
-} from "src/generated/resolvers-types"
-import { dateScalar } from "src/resolvers/scalars.resolve"
-import Items, { Item } from "src/resolvers/items/items.resolve"
-import { ItemsLoader } from "src/resolvers/items/items.repo"
-import { getContext } from "src/utils/context"
+} from 'src/generated/resolvers-types'
+import { dateScalar } from 'src/resolvers/scalars.resolve'
+import Items, { Item } from 'src/resolvers/items/items.resolve'
+import { ItemsLoader } from 'src/resolvers/items/items.repo'
+import { getContext } from 'src/utils/context'
 
-const packageJson = require("../package.json")
+const packageJson = require('../package.json')
 
 function loadGQL(filename: string) {
   const filePath = path.join(__dirname, filename)
@@ -20,10 +20,10 @@ function loadGQL(filename: string) {
   return gql(schemaString)
 }
 
-const typeDefs = loadGQL("./schema.gql")
+const typeDefs = loadGQL('./schema.gql')
 
 const Query: QueryResolvers = {
-  version: (_, __, ctx) => packageJson["version"] + "-" + ctx.decodedToken?.uid,
+  version: (_, __, ctx) => packageJson['version'] + '-' + ctx.decodedToken?.uid,
   ...Items.Query,
 }
 

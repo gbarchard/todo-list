@@ -1,5 +1,5 @@
-import { ObjectId } from "bson"
-import { Slug, UserId } from "src/general.types"
+import { ObjectId } from 'bson'
+import { Slug, UserId } from 'src/general.types'
 
 export interface ItemModel {
   _id: ObjectId

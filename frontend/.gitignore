@@ -7,3 +7,4 @@
 /build
 
 generated
+/src/utils/firebase.json

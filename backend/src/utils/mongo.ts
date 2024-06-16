@@ -1,5 +1,5 @@
 import DataLoader from 'dataloader'
-import { Db, MongoClient, ObjectId } from 'mongodb'
+import { Db, Document, MongoClient } from 'mongodb'
 import hash from 'object-hash'
 
 const DEFAULT_DB = 'default'
@@ -10,9 +10,9 @@ const client = new MongoClient(
 export class Mongo {
   static db: Db = null as unknown as Db
 
-  private static onConnectHooks: Function[] = []
+  private static onConnectHooks: (() => void)[] = []
 
-  static onConnect(fn: Function) {
+  static onConnect(fn: () => void) {
     Mongo.onConnectHooks.push(fn)
   }
 
@@ -30,16 +30,16 @@ export class Mongo {
   }
 }
 
-export function _id(doc: any) {
-  if (typeof doc == 'object' && doc['_id']) return doc['_id']
+export function _id(doc: Document) {
+  if (typeof doc === 'object' && doc?._id) return doc['_id']
   else return null
 }
 
-export function slug(doc?: any) {
-  return Array.isArray(doc?.slug) ? doc.slug[0] : doc?.slug
+export function slug(doc?: Document) {
+  return Array.isArray(doc?.slug) ? doc?.slug?.[0] : doc?.slug
 }
 
-export function fnLoader<A extends any[], R>(fn: (...args: A) => R) {
+export function fnLoader<A extends unknown[], R>(fn: (...args: A) => R) {
   const loader = new DataLoader<A, R, string>(
     (argsList) => {
       return Promise.all(

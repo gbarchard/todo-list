@@ -2,7 +2,7 @@ import { ObjectId } from 'bson'
 import { Collection } from 'mongodb'
 import { ObjectIdLike, Slug, UserId } from 'src/general.types'
 
-import { _id, Mongo, fnLoader } from 'src/utils/mongo'
+import { Mongo, fnLoader } from 'src/utils/mongo'
 import { ItemModel } from './items.model'
 
 const ITEMS_COLLECTION = 'items'

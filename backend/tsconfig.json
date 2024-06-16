@@ -1,6 +1,7 @@
 {
   "ts-node": {
-    "files": true
+    "files": true,
+    "logError": true
   },
   "compilerOptions": {
     "baseUrl": ".",

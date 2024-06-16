@@ -1,5 +1,4 @@
 import { ObjectId } from 'bson'
-import { Collection } from 'mongodb'
 
 import {
   ItemResolvers,

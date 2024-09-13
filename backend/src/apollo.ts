@@ -9,10 +9,9 @@ import {
 } from 'src/generated/resolvers-types'
 import { dateScalar } from 'src/resolvers/scalars.resolve'
 import Items, { Item } from 'src/resolvers/items/items.resolve'
+import Version from 'src/resolvers/version/version.resolve'
 import { ItemsLoader } from 'src/resolvers/items/items.repo'
 import { getContext } from 'src/utils/context'
-
-import packageJson from '../package.json'
 
 function loadGQL(filename: string) {
   const filePath = path.join(__dirname, filename)
@@ -23,7 +22,7 @@ function loadGQL(filename: string) {
 const typeDefs = loadGQL('./schema.gql')
 
 const Query: QueryResolvers = {
-  version: (_, __, ctx) => packageJson['version'] + '-' + ctx.decodedToken?.uid,
+  ...Version.Query,
   ...Items.Query,
 }
 

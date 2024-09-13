@@ -1,7 +1,4 @@
-scalar Date
-
 type Query {
-  version: String!
   items: [Item!]!
 }
 

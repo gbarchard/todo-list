@@ -1,6 +1,4 @@
-import { ExpressContext, ApolloServer, gql } from 'apollo-server-express'
-import fs from 'fs'
-import path from 'path'
+import { ExpressContext, ApolloServer } from 'apollo-server-express'
 
 import {
   MutationResolvers,
@@ -12,14 +10,7 @@ import Items, { Item } from 'src/resolvers/items/items.resolve'
 import Version from 'src/resolvers/version/version.resolve'
 import { ItemsLoader } from 'src/resolvers/items/items.repo'
 import { getContext } from 'src/utils/context'
-
-function loadGQL(filename: string) {
-  const filePath = path.join(__dirname, filename)
-  const schemaString = fs.readFileSync(filePath).toString()
-  return gql(schemaString)
-}
-
-const typeDefs = loadGQL('./schema.gql')
+import typeDefs from './resolvers/typeDefs'
 
 const Query: QueryResolvers = {
   ...Version.Query,

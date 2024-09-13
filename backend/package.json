@@ -24,6 +24,7 @@
     "express-winston": "^4.2.0",
     "firebase-admin": "^10.0.1",
     "graphql": "^16.0.0",
+    "graphql-tools": "^9.0.1",
     "mongodb": "^4.1.4",
     "object-hash": "^3.0.0",
     "regenerator-runtime": "^0.13.9",

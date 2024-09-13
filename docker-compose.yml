@@ -9,7 +9,7 @@ services:
       - 3000:3000
     volumes:
       - ./frontend:/app
-      - ./backend/src/schema.gql:/backend/src/schema.gql
+      - ./backend/src:/backend/src
 
   codegen-frontend:
     container_name: codegen-frontend
@@ -19,7 +19,7 @@ services:
       dockerfile: dev.Dockerfile
     volumes:
       - ./frontend:/app
-      - ./backend/src/schema.gql:/backend/src/schema.gql
+      - ./backend/src:/backend/src
     command: 'npm run gen:dev'
 
   backend:

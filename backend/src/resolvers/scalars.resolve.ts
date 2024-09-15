@@ -3,7 +3,7 @@ import { GraphQLScalarType, Kind } from 'graphql'
 /**
  * @description Date scalar
  */
-export const dateScalar: GraphQLScalarType = new GraphQLScalarType({
+const dateScalar: GraphQLScalarType = new GraphQLScalarType({
   name: 'Date',
   description: 'Date custom scalar type',
   serialize(value) {
@@ -19,3 +19,7 @@ export const dateScalar: GraphQLScalarType = new GraphQLScalarType({
     return null // Invalid hard-coded value (not an integer)
   },
 })
+
+export default {
+  Date: dateScalar,
+}

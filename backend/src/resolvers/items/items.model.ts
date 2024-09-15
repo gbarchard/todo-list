@@ -4,7 +4,7 @@ import { Slug, UserId } from 'src/general.types'
 export interface ItemModel {
   _id: ObjectId
   slug: Slug
-  name: String
+  name: string
   ownerId: UserId
   createdDate: Date
 }
